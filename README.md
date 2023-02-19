@@ -6,8 +6,7 @@ Overview :
 Consider a business ‘Small Bazar’, which operates  in the Retail domain. 
 
 Business Details (Use the below details to design your Database)
-
-1. Small Bazar is a multinational company with Branch presence in many cities and towns around the world. 
+Small Bazar is a multinational company with Branch presence in many cities and towns around the world. 
 They even have multiple branches in some cities and towns. 
 Based on demand, they keep activating and deactivating the Branches.
 
