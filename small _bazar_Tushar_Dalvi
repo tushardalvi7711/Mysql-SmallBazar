@@ -1,0 +1,443 @@
+create  database smallbazar;
+
+use smallbazar
+
+create table customer(
+c_id int  Primary Key AUTO_INCREMENT ,
+C_name varchar(50),
+mob_no int ,
+city varchar(30),
+state varchar(30),
+country varchar(30));
+
+select * from customer;
+
+insert into customer(C_name,mob_no,city,state) values ('Chetan', 678900,'pune', 'maharashtra', 'India');
+
+insert into customer (C_name,mob_no,city,state)  values ('Raj', 839445,'Mumbai', 'maharashtra','India');
+insert into customer (C_name,mob_no,city,state) values ('Kiran', 97635545,'Thane', 'maharashtra','India');
+insert into customer (C_name,mob_no,city,state) values ('Madhuri', 246783,'Pimpri', 'maharashtra','India');
+insert into customer (C_name,mob_no,city,state) values ('Payal', 987645,'Satara', 'maharashtra','India');
+insert into customer (C_name,mob_no,city,state) values ('Rutika', 5465384,'Pune', 'maharashtra','India');
+insert into customer (C_name,mob_no,city,state) values ('Amol', 857958,'Mumbai', 'maharashtra','India');
+
+select * from customer;
+
+create table product(
+p_id int  auto_increment Primary key,
+P_name varchar(30),
+cost_price int ,
+selling_price int ,
+quantity int not null);
+alter table product auto_increment = 10;
+
+select * from product;
+insert into product(P_name,cost_price,selling_price,quantity) values ('Sugar', 60,70,1);
+insert into product (P_name,cost_price,selling_price,quantity) values ('Wheat', 90,120,5);
+insert into product (P_name,cost_price,selling_price,quantity) values ('Ghee', 300,400,2);
+insert into product(P_name,cost_price,selling_price,quantity) values ('Soap', 50,60,5);
+insert into product(P_name,cost_price,selling_price,quantity) values ('Moong Dal',80 ,120,3);
+insert into product(P_name,cost_price,selling_price,quantity) values ('Rice', 70,100,5);
+insert into product(P_name,cost_price,selling_price,quantity) values ('Oil', 120,140,5);
+insert into product(P_name,cost_price,selling_price,quantity) values ('Salt', 70,90,2);
+insert into product(P_name,cost_price,selling_price,quantity) values ('Almond',800,1000,2);
+insert into product(P_name,cost_price,selling_price,quantity) values ('Oats', 150,180,1);
+
+
+create table order_detail(
+order_id int ,
+p_id int,
+quantity int,
+order_date date ,
+delivery_date date,
+delivery_charges decimal ,
+Primary key (order_id, p_id) ,
+foreign key (p_id ) references product(p_id));
+
+alter table order_detail
+add column delivery_option varchar(50) not null;
+
+alter table order_detail
+add foreign key (order_id) references order_master(order_id);
+
+select * from order_detail;
+select * from product;
+
+insert into order_detail (order_id, p_id, quantity,
+						order_date,delivery_date,delivery_charges, delivery_option) 
+                        values( 201,10,1,'2022-07-10','2022-07-10',0,'self pick up');
+                        
+  insert into order_detail (order_id, p_id,
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 201,15,2,'2022-07-10','2022-07-10',0,'self pick up'),
+						( 201,13,4,'2022-07-10','2022-07-10',0,'self pick up'),
+						( 201,19,5,'2022-07-10','2022-07-10',0,'self pick up'),
+						( 201,11,3,'2022-07-10','2022-07-10',0,'self pick up');
+
+  insert into order_detail (order_id, p_id,quantity,
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 202,18,2,'2022-07-11','2022-07-12',100,'home delivery'),
+						( 202,13,3,'2022-07-11','2022-07-12',100,'home delivery'),
+						( 202,19,5,'2022-07-11','2022-07-12',100,'home delivery'),
+						( 202,10,1,'2022-07-11','2022-07-12',100,'home delivery'),
+                        ( 202,17,3,'2022-07-11','2022-07-12',100,'home delivery');
+	
+    insert into order_detail (order_id, p_id, quantity,
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 203,18,2,'2022-07-13','2022-07-13',0,'self pick up'),
+						( 203,13,4,'2022-07-13','2022-07-13',0,'self pick up'),
+						( 203,16,2,'2022-07-13','2022-07-13',0,'self pick up'),
+						( 203,15,3,'2022-07-13','2022-07-13',0,'self pick up'); 
+                        
+  insert into order_detail (order_id, p_id,quantity
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 204,15,2,'2022-07-14','2022-07-15',100,'home delivery'),
+						( 204,12,4,'2022-07-14','2022-07-15',100,'home delivery'),
+						( 204,13,3,'2022-07-14','2022-07-15',100,'home delivery');
+                        
+  insert into order_detail (order_id, p_id,
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 205,15,2,'2022-07-17','2022-07-17',0,'self pick up'),
+						( 205,19,2,'2022-07-17','2022-07-17',0,'self pick up'),
+						( 205,14,3,'2022-07-17','2022-07-17',0,'self pick up'),
+						( 205,18,4,'2022-07-17','2022-07-17',0,'self pick up'),
+						( 205,13,3,'2022-07-17','2022-07-17',0,'self pick up');
+
+ insert into order_detail (order_id, p_id, 
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 206,15,2,'2022-07-19','2022-07-19',0,'self pick up'),
+						( 206,12,4,'2022-07-19','2022-07-19',0,'self pick up'),
+						( 206,18,6,'2022-07-19','2022-07-19',0,'self pick up'),
+						( 206,13,1,'2022-07-19','2022-07-19',0,'self pick up');
+                        
+  insert into order_detail (order_id, p_id,quantity,
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 207,10,2,'2022-07-19','2022-07-20',100,'home delivery'),
+						( 207,13,3,'2022-07-19','2022-07-20',100,'home delivery'),
+						( 207,17,6,'2022-07-19','2022-07-20',100,'home delivery'),
+						( 207,19,1,'2022-07-10','2022-07-20',100,'home delivery');
+                                               
+                        
+ insert into order_detail (order_id, p_id, quantity,
+						order_date,delivery_date,delivery_charges, delivery_option)                      
+						values ( 208,10,2,'2022-07-19','2022-07-21',100,'home delivery'),
+						( 208,12,3,'2022-07-19','2022-07-21',100,'home delivery'),
+						( 208,11,1,'2022-07-10','2022-07-21',100,'home delivery');
+                        
+select * from order_detail; 
+                        
+create table order_master(
+order_id int primary key auto_increment not null,
+c_id int not null,
+branch_id int not null,
+foreign key (c_id) references customer(c_id));
+alter table order_master
+auto_increment =100;
+
+alter table order_master 
+add foreign key (branch_id) references branch(branch_id);
+
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('201', '1', '500');
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('202', '2', '501');
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('203', '3', '502');
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('204', '4', '503');
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('205', '5', '504');
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('206', '6', '505');
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('207', '7', '506');
+INSERT INTO `order_master` (`order_id`, `c_id`, `branch_id`) VALUES ('208', '5', '507');
+
+
+select * from order_master ;
+select order_id from order_detail;
+select c_id from customer;
+select branch_id from branch;
+
+create table branch(order_id, c_id , branch_id 
+branch_id int not null Primary key auto_increment,
+b_name varchar(50) not null ,
+city varchar(50),
+state varchar (50),
+status varchar (50),
+country varchar(30));
+alter table branch auto_increment = 500;
+
+select * from branch;
+
+
+insert into branch  (b_name, city, state, status, country) 
+				values ('Pune','Pune','maharashtra', 'active','India'),
+				 ('Mumbai','Mumbai','maharashtra', ' non active','India'),
+				 ('Satara','Satara','maharashtra', 'active','India'),
+                  ('Thane','Thane','maharashtra', 'active','India'),
+                   ('Sangli','Sangli','maharashtra', 'active','India'),
+                    ('Kolhapur','Kolhapur','maharashtra', 'active','India'),
+                     ('Aurangabad','Aurangabad','maharashtra', 'active','India'),
+                      ('Pimpri','Pimpri','maharashtra', 'non active','India');
+                      
+
+create Table stock (
+p_id int,
+branch_id int ,
+quantity int ,
+foreign key (p_id) references product(p_id),
+foreign key (branch_id) references branch(branch_id) );
+
+select * from stock;
+select * from product;
+select * from branch;
+
+insert into stock (p_id, branch_id,quantity)  values (10, 500,50),
+													(11, 501,40), 
+                                                    (12, 502,100), 
+                                                    (13, 503,50), 
+                                                    (14, 504,40), 
+                                                    (15, 505,60), 
+                                                    (16, 506,50), 
+                                                    (17, 507,100), 
+                                                    (18, 502,50), 
+                                                    (19, 504,40);
+---------------------------------------------------------------------                                                    
+  /*  1.  The CEO of ‘Small Bazar’ wants to check the profitability of the Branches.
+  Create a View for his use which will show monthly Profit of all Branches for the current year. */  
+  select * from product;
+  select * from branch;
+  select * from order_detail;
+  select * from order_master;
+  
+  alter table product
+  drop column quantity;
+  
+  create view monthly_profit as 
+  select branch_id,sum(quantity *selling_price - quantity*cost_price) as Profit from 
+  order_detail o join order_master m 
+  on o.order_id = m.order_id
+  join 
+  product p 
+  on p.p_id = o.p_id 
+  group by branch_id ;
+  
+  select * from monthly_profit;
+  drop view monthly_profit;
+  
+  --------------------------------------------------------------
+  /* 2.Create a stored procedure having countryName, FromDate and ToDate as Parameter, which will return Sitewise,
+  Item Wise and  Date Wise the number of items sold in the given Date range as separate resultsets.
+  Create appropriate Indexes on the tables. */
+  
+  
+use smallbazar ;
+select * from order_detail;
+select * from product;
+select * from branch;
+select * from customer;
+select * from order_master;
+
+Delimiter //
+
+create procedure itemsold(
+In country_name varchar(30),
+In Fromdate date ,
+In Todate date)
+Begin 
+
+declare branch varchar(30);
+declare product_id int ;
+declare no_quantitysell int;
+declare Odate date;
+
+declare finish int default 0;
+
+declare cur1 cursor for ( 
+select b.b_name ,o.p_id, o.order_date,sum(o.quantity) 
+from order_detail o join Order_master om 
+on o.order_id = om.order_id
+join branch b 
+on b.branch_id = om.branch_id
+where o.order_date BETWEEN Fromdate and Todate
+and b.country=country_name
+group by b.b_name ,o.p_id,o.order_date);
+
+declare continue handler for not found set finish = 1;
+open cur1;
+l1 : loop 
+If Finish = 1 then leave l1;
+end if ;
+Fetch cur1 into branch,product_id,Odate,no_quantitysell;
+select branch,product_id,Odate,no_quantitysell;
+end loop;
+
+close cur1;
+
+end //
+
+delimiter ;
+
+call itemsold('India', '2022-07-01','22-08-01');
+
+drop procedure itemsold;
+
+  
+  /* Create a stored procedure which will calculate the total bill for any order. Bill should have details like: 
+CustomerName, 
+orderId,
+ OrderDate,
+ Branch,
+ ProductName, 
+ Price per Unit,
+
+ No. Of Units,
+ Total Cost of that product,
+ Total Bill Amount,
+ Additional Charges (0 if none),
+ Delivery Option(‘Home Delivery' or ‘self Pickup’). */
+ 
+ select * from customer;
+ select * from product;
+ select * from order_detail;
+ select * from order_master ;
+ 
+Delimiter //
+create procedure Bill (
+IN orderid int )
+
+Begin  
+Declare finished int Default 0;
+declare customer_name varchar(50);
+declare order_id int;
+declare order_date date;
+declare branch varchar(50);
+declare product_name varchar(50);
+declare price_per_unit int;
+declare No_of_units int ;
+declare total_cost_per_product int;
+declare Totalbill int;
+declare Delivery_charges int;
+declare delivery_option varchar (50);
+
+DEClARE curbill 
+		CURSOR FOR (
+			SELECT c.c_name,od.order_id, od.order_date,b.b_name,p.P_name, p.selling_price,
+            od.quantity,( p.selling_price * od.quantity) as t_of_product,od.delivery_charges,
+            sum(p.selling_price * od.quantity +od.delivery_charges) as totl_bill ,
+            od.delivery_option
+ from order_detail od join order_master om
+ on(od.order_id=om.order_id)
+ join product p
+ on(p.p_id=od.p_id)
+ join branch b
+ on(b.branch_id=om.branch_id and od.p_id=p.p_id)
+join customer c
+on(c.c_id=om.c_id)
+where od.order_id=orderid
+group by od.order_id );
+
+declare continue handler for
+not found set finished =1;
+open curbill;
+l1:loop
+if finished = 1
+then leave l1;
+end if ;
+Fetch curbill into customer_name , order_id,order_date,branch, product_name ,price_per_unit ,
+No_of_units,total_cost_per_product,Delivery_charges,Totalbill, delivery_option;
+
+select customer_name , order_id,order_date,branch, product_name ,price_per_unit ,
+No_of_units,total_cost_per_product,Delivery_charges,Totalbill, delivery_option;
+
+end loop l1;
+close curbill;
+
+end //
+
+Delimiter ;
+
+
+call bill(202);
+ 
+--------------------------------------------------------------------------
+/* Create a (function )Procedure  having a parameter as country name ,
+which displays all the  branches available In the country that are active.  */
+
+Delimiter //
+
+create procedure Branches ( IN Countryname varchar(30) )
+Begin 
+
+			SELECT country,b_name from branch 
+             where status = 'active' and country= Countryname ;
+            
+End //
+
+Delimiter ;
+
+drop procedure Branches ;
+
+call Branches('India');
+-----------------------------------------------------------
+/* Create a trigger which will be invoked on adding a new item in the Item entity and insert that new item in another table with date and time when the item is added
+ so that we can have date and time when an item was added. */
+ 
+ create table update_product (
+ p_name varchar(50),
+ Inserted_date timestamp);
+ 
+ select * from product;
+ delimiter //
+ create Trigger Update_product1
+ After insert on product 
+ for each row 
+ Begin 
+ 
+ insert into  update_product (p_name,Inserted_date) values (new.P_name,now());
+ 
+ end //
+delimiter ;
+
+insert into product values (null,'Pen',7,10);
+select * from product;
+select * from update_product;
+-------------------------------------------------------------
+/* Write a Trigger which will reduce the stock of some product whenever an order is confirmed  by the number
+ of that product in the order. Eg. If an order with 10 Oranges is confirmed from Nagpur branch, 
+ Stock of Oranges from Nagpur branch must be reduced by 10. */
+ 
+ select * from order_detail;
+ select * from order_master;
+ select * from stock;
+ 
+ Delimiter //
+ 
+ create trigger update_stock 
+ After insert on order_detail
+ for each row 
+ Begin 
+ Declare x int ;
+ select om.branch_id INTO x 
+ from 
+ order_detail o join order_master om 
+ on o.order_id = om.order_id 
+ where o.order_id=new.order_id;
+ update Stock s 
+ set s.quantity = s.quantity-new.quantity
+ where (s.p_id = new.p_id)
+ and s.branch_id = x;
+ 
+ end //
+ 
+ delimiter ;
+ 
+ drop trigger update_stock;
+
+ select * from order_detail;
+ select * from order_master ;
+ select * from stock;
+ 
+ insert into order_detail values(213,11,5,'2022-09-21','2022-09-21',0,'self pick up');
+ 
+ insert into order_master values (213,3,501);
+ rollback;
+ insert into order_detail (order_id, p_id, quantity,
+						order_date,delivery_date,delivery_charges, delivery_option) 
+                        values(209,10,5,'2022-07-15','2022-07-15',0,'self pick up');
+							 
+create database sample;
